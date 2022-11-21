@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 
 async function cargarUsuarios(){
-      const request = await fetch('usuarios', {
+      const request = await fetch('api/usuarios', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -17,14 +17,28 @@ async function cargarUsuarios(){
 
         let listadohtml = '';
       for (let usuario of usuarios){
+        let botonEliminar ='<a href="#" onclick="eliminarUsuario('+ usuario.id +')" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>';
+
         let usuariohtml = '<tr><td>' + usuario.id + '</td><td>' + usuario.nombre + ' ' + usuario.apellido + '</td><td>'
                             + usuario.email+'</td><td>'+usuario.telefono
-                            + '</td><td><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td></tr>';
+                            + '</td><td> ' + botonEliminar + ' </td></tr>';
 
         listadohtml += usuariohtml;
       }
-      console.log(usuarios);
-
 
       document.querySelector('#usuarios tbody').outerHTML = listadohtml;
+}
+
+
+async function eliminarUsuario(id){
+    if(!confirm('¿Deseas eliminar el usuario')){
+        return;}
+    const request = await fetch('api/usuarios/'+ id, {
+            method: 'DELETE',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+          location.reload();
 }
