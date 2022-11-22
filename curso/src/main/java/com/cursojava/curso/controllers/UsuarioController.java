@@ -2,6 +2,7 @@ package com.cursojava.curso.controllers;
 
 import com.cursojava.curso.dao.UsuarioDao;
 import com.cursojava.curso.models.Usuario;
+import com.cursojava.curso.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioDao usuarioDao;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
 
     @RequestMapping(value ="api/usuarios/{id}", method = RequestMethod.GET)
@@ -31,8 +35,17 @@ public class UsuarioController {
     }
 
     @RequestMapping(value ="api/usuarios", method = RequestMethod.GET)
-    public List<Usuario> getUsuarios(){
+    public List<Usuario> getUsuarios(@RequestHeader(value="Authorization") String token) {
+        if (!validarToken(token)){return null; }
+
         return usuarioDao.getUsuarios();
+    }
+
+    private boolean validarToken(String token){
+        //comparacion del token
+        String usuarioId = jwtUtil.getKey(token);
+
+        return usuarioId != null;
     }
 
     @RequestMapping(value ="api/usuarios", method = RequestMethod.POST)
@@ -60,18 +73,10 @@ public class UsuarioController {
     }
 
     @RequestMapping(value ="api/usuarios/{id}", method = RequestMethod.DELETE)
-    public void eliminar(@PathVariable Long id){
+    public void eliminar(@RequestHeader(value="Authorization") String token,
+                         @PathVariable Long id){
+        if (!validarToken(token)){return; }
         usuarioDao.eliminar(id);
     }
 
-    @RequestMapping(value ="buscar")
-    public Usuario buscar(){
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Lucas");
-        usuario.setApellido("Moy");
-        usuario.setEmail("lucasmoy@gmail.com");
-        usuario.setTelefono("2481314567");
-
-        return usuario;
-    }
 }

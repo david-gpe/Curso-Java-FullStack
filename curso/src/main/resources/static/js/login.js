@@ -19,7 +19,10 @@ async function iniciarSesion(){
         body: JSON.stringify(datos)
       });
       const respuesta = await request.text();
-      if(respuesta == "Ok"){
+      if(respuesta != "Fail"){
+      //localStorage es para guardar la informacion contenida en respuesta
+      localStorage.token = respuesta;
+      localStorage.email = datos.email;
         window.location.href = "index.html"
       }else{
         alert("Usuario invalido");

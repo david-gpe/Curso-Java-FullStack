@@ -95,6 +95,14 @@
 			<artifactId>argon2-jvm</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<!--
+          Dependencia para las sesiones(JWT)
+         -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 
 	</dependencies>
 
