@@ -39,35 +39,38 @@
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        <input type="text" class="form-control form-control-user" id="txtNombre"
                                             placeholder="Nombre">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control form-control-user" id="txtApellido"
                                             placeholder="Apellido">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="email" class="form-control form-control-user" id="txtEmail"
                                         placeholder="Correo">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Contraseña">
+                                            id="txtPassword" placeholder="Contrasña">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repita la Contraseña">
+                                            id="txtRepetirPassword" placeholder="Repita la Contraseña">
                                     </div>
                                 </div>
-                                <a href="login.html" onclick="registrarUsuario()" class="btn btn-primary btn-user btn-block">
+                                <a href="login.html" onclick="registrarUsuarios()" class="btn btn-primary btn-user btn-block">
                                     Registrarse
                                 </a>
                                 <hr>
 
                             </form>
                             <hr>
+                            <div class="text-center">
+                                <a class="small" href="login.html">¿Ya posees una cuenta? Inicia Sesión!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,6 +88,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="js/registrar.js"></script>
+
 
 </body>
 
